@@ -6,9 +6,9 @@ const btnDel = document.getElementById('btnDelValue');
 btnAdd.addEventListener('click', insertNode);
 btnDel.addEventListener('click', removeNode);
 
-window.onkeydown = async (k) => {
+window.onkeydown = (k) => {
     if (k.code === 'Enter' && !isNaN(inputValue.value)) {
-        await insertNode();
+        insertNode();
     } 
 }
 
@@ -18,19 +18,23 @@ const inputValue = document.getElementById('inputValue');
 const tree = new Tree();
 
 
-async function insertNode() {
+function insertNode() {
     const value = parseInt(inputValue.value);
 
     if (!isNaN(value)) {
-        await tree.insert(value);
+        tree.insert(value);
     }
+
+    tree.render('tree-container');
 }
 
-async function removeNode() {
+function removeNode() {
     const value = parseInt(inputValue.value);
 
     if (!isNaN(value)) {
-        await tree.remove(value);
+        tree.remove(value);
     }
+
+    tree.render('tree-container');
 }
 

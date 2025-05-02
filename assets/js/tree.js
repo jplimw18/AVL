@@ -14,17 +14,12 @@ export class Tree {
         this.root = null;
     }
     
-    async insert(value) {
-        this.root = await new Promise((resolve) => {
-            resolve(this._insert(this.root, value));
-        });
-        this.render('tree-container');
+    insert(value) {
+        this.root = this._insert(this.root, value);
     }
-    
     
     remove(value) {
         this.root = this._remove(this.root, value);
-        this.render('tree-container');
     }
     
     _insert(node, value) {
@@ -173,14 +168,6 @@ export class Tree {
         
         this._renderNode(container, node.left, x - spacingX, y + spacingY, level + 1, node);
         this._renderNode(container, node.right, x + spacingX, y + spacingY, level + 1, node);
-    }
-
-    print(node, prefix = "", isLeft = true) {
-        if (node !== null) {
-            console.log(prefix + (isLeft ? "├── " : "└── ") + node.value);
-            this.print(node.left, prefix + (isLeft ? "│   " : "    "), true);
-            this.print(node.right, prefix + (isLeft ? "│   " : "    "), false);
-        }
     }
 }
 
