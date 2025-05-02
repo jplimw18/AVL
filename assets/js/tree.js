@@ -133,7 +133,7 @@ export class Tree {
     render(containerId) {
         const container = document.getElementById(containerId);
         const height = this._getHeight();
-        
+
         const nodeMap = {}; 
         container.querySelectorAll('.node').forEach(nodeEl => {
             nodeMap[nodeEl.textContent] = nodeEl;
@@ -148,7 +148,7 @@ export class Tree {
 
         for (const value in nodeMap) {
             nodeMap[value].classList.add('fade-out');
-            setTimeout(() => nodeMap[value].remove(), 500); // Remove após a animação
+            setTimeout(() => nodeMap[value].remove(), 500);
         }
     }
 
@@ -157,7 +157,7 @@ export class Tree {
     
         const height = this._getHeight();
         const baseSpacing = 80;
-        const spacingX = baseSpacing * Math.pow(0.7, level) * (6 / height);
+        const spacingX = baseSpacing * Math.pow(0.8, level) * (10 / height);
         const spacingY = 80;
     
         let nodeEl = nodeMap[node.value];
