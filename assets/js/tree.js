@@ -124,36 +124,94 @@ export class Tree {
     }
     
     
+    // render(containerId) {
+    //     const container = document.getElementById(containerId);
+    //     container.innerHTML = "";
+    //     this._renderNode(container, this.root, container.offsetWidth / 2, 20);
+    // }
+
     render(containerId) {
         const container = document.getElementById(containerId);
-        container.innerHTML = "";
-        this._renderNode(container, this.root, container.offsetWidth / 2, 20);
+    
+        const nodeMap = {}; // Mapeia valor -> elemento
+        container.querySelectorAll('.node').forEach(nodeEl => {
+            nodeMap[nodeEl.textContent] = nodeEl;
+        });
+    
+        // Limpa apenas as linhas (não os nós)
+        container.querySelectorAll('.line').forEach(line => line.remove());
+    
+        this._renderAnimated(container, this.root, container.offsetWidth / 2, 20, 1, null, nodeMap);
     }
     
-    _renderNode(container, node, x, y, level = 1, parent = null) {
-        if (!node) return;
+    // _renderNode(container, node, x, y, level = 1, parent = null) {
+    //     if (!node) return;
         
+    //     const spacingX = 120 * Math.pow(0.8, level);
+    //     const spacingY = 80;
+        
+    //     const nodeEl = document.createElement('div');
+    //     nodeEl.className = 'node';
+    //     nodeEl.textContent = node.value;
+    //     nodeEl.style.left = `${x}px`;
+    //     nodeEl.style.top = `${y}px`;
+    //     container.appendChild(nodeEl);
+        
+    //     if (parent) {
+    //         const x1 = parent.x + 20;
+    //         const y1 = parent.y + 20;
+    //         const x2 = x + 20;
+    //         const y2 = y + 20;
+            
+    //         const dx = x2 - x1;
+    //         const dy = y2 - y1;
+    //         const length = Math.sqrt(dx * dx + dy * dy);
+    //         const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+            
+    //         const line = document.createElement('div');
+    //         line.className = 'line';
+    //         line.style.width = `${length}px`;
+    //         line.style.left = `${x1}px`;
+    //         line.style.top = `${y1}px`;
+    //         line.style.transform = `rotate(${angle}deg)`;
+    //         container.appendChild(line);
+    //     }
+        
+    //     node.x = x;
+    //     node.y = y;
+        
+    //     this._renderNode(container, node.left, x - spacingX, y + spacingY, level + 1, node);
+    //     this._renderNode(container, node.right, x + spacingX, y + spacingY, level + 1, node);
+    // }
+
+    _renderAnimated(container, node, x, y, level = 1, parent = null, nodeMap) {
+        if (!node) return;
+    
         const spacingX = 120 * Math.pow(0.8, level);
         const spacingY = 80;
-        
-        const nodeEl = document.createElement('div');
-        nodeEl.className = 'node';
-        nodeEl.textContent = node.value;
+    
+        let nodeEl = nodeMap[node.value];
+        if (!nodeEl) {
+            nodeEl = document.createElement('div');
+            nodeEl.className = 'node';
+            nodeEl.textContent = node.value;
+            container.appendChild(nodeEl);
+        }
+    
         nodeEl.style.left = `${x}px`;
         nodeEl.style.top = `${y}px`;
-        container.appendChild(nodeEl);
-        
+    
         if (parent) {
             const x1 = parent.x + 20;
             const y1 = parent.y + 20;
             const x2 = x + 20;
             const y2 = y + 20;
-            
+    
             const dx = x2 - x1;
             const dy = y2 - y1;
             const length = Math.sqrt(dx * dx + dy * dy);
             const angle = Math.atan2(dy, dx) * 180 / Math.PI;
-            
+    
             const line = document.createElement('div');
             line.className = 'line';
             line.style.width = `${length}px`;
@@ -162,12 +220,13 @@ export class Tree {
             line.style.transform = `rotate(${angle}deg)`;
             container.appendChild(line);
         }
-        
+    
         node.x = x;
         node.y = y;
-        
-        this._renderNode(container, node.left, x - spacingX, y + spacingY, level + 1, node);
-        this._renderNode(container, node.right, x + spacingX, y + spacingY, level + 1, node);
+    
+        this._renderAnimated(container, node.left, x - spacingX, y + spacingY, level + 1, node, nodeMap);
+        this._renderAnimated(container, node.right, x + spacingX, y + spacingY, level + 1, node, nodeMap);
     }
+    
 }
 

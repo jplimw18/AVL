@@ -20,6 +20,8 @@
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 
     z-index: 10;
+
+    transition: left 1s ease, top 1s ease;
 }
 
 .line {
@@ -27,6 +29,8 @@
     background-color: #333;
     height: 2px;
     transform-origin: left center;
+
+    transition: left 1s ease, top 1s ease, transform 1s ease, width 1s ease;
 }
 
 @keyframes fadeInScale {
