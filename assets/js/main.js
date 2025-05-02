@@ -12,6 +12,12 @@ window.onkeydown = (k) => {
     } 
 }
 
+window.onload = () => {
+    document.querySelector('form').onsubmit = (e) => {
+        e.preventDefault();
+    };
+}
+
 
 const inputValue = document.getElementById('inputValue');
 
@@ -23,9 +29,10 @@ function insertNode() {
 
     if (!isNaN(value)) {
         tree.insert(value);
+        // inputValue.value = '';
+        tree.render('tree-container');
     }
 
-    tree.render('tree-container');
 }
 
 function removeNode() {
@@ -33,8 +40,9 @@ function removeNode() {
 
     if (!isNaN(value)) {
         tree.remove(value);
+        // inputValue.value = '';
+        tree.render('tree-container');
     }
 
-    tree.render('tree-container');
 }
 
