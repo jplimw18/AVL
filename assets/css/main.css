@@ -1,28 +1,41 @@
-body {
-    font-family: sans-serif;
-    text-align: center;
-    background: #f9f9f9;
-}
-
 #tree-container {
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 30px;
+    position: relative;
+    width: 100%;
+    min-height: 600px;
+    border: 1px solid #ccc;
+    overflow-x: auto;
 }
 
 .node {
-    display: inline-block;
-    background: #6ab7ff;
+    position: absolute;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    padding: 20px;
+    background-color: #4CAF50;
     color: white;
-    position: relative;
-    transition: transform 0.5s ease, opacity 0.5s ease;
+    text-align: center;
+    line-height: 40px;
+    font-weight: bold;
+    animation: fadeInScale 0.4s ease-out;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+
+    z-index: 10;
 }
 
-.node.removing {
-    opacity: 0;
-    transform: scale(0.5);
+.line {
+    position: absolute;
+    background-color: #333;
+    height: 2px;
+    transform-origin: left center;
+}
+
+@keyframes fadeInScale {
+    0% {
+        opacity: 0;
+        transform: scale(0.6);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
