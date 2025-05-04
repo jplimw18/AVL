@@ -5,7 +5,7 @@
     border: 1px solid #c6c6c6;
 
     position: relative;
-    overflow: auto;
+    overflow: scroll;
 
     margin-block: 20px;
 
@@ -14,21 +14,26 @@
 }
 
 .node {
-    position: absolute;
     width: 40px;
     height: 40px;
-    border-radius: 50%;
+
+    position: absolute;
+    
     background-color: #4CAF50;
+
     color: white;
     text-align: center;
     line-height: 40px;
     font-weight: bold;
-    animation: fadeInScale 0.4s ease-out;
+    
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 
-    z-index: 10;
-
+    border-radius: 50%;
+    
+    animation: fadeInScale 0.4s ease-out;
     transition: left 1s ease, top 1s ease;
+
+    z-index: 10;
 }
 
 .node.fade-out {
@@ -36,10 +41,10 @@
     pointer-events: none;
 }
 
-.node.highlight {
+/* .node.highlight {
     background-color: chocolate;
     transition: background-color 0.3s ease;
-}
+} */
 
 .line {
     position: absolute;

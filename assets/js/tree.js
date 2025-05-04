@@ -163,10 +163,10 @@ export class Tree {
 
         const childHeight = Math.max(this._getHeight(node.left), this._getHeight(node.right));
 
-        const baseSpacing = 80;
-        const funnelFactor = Math.pow(1.4, childHeight - level);
+        const baseSpacing = 40 * Math.pow(1.25, childHeight);
+        const funnelFactor = Math.pow(1.25, childHeight - level);
         const spacingX = baseSpacing * funnelFactor;
-        const spacingY = 80 * Math.pow(1.2, childHeight);
+        const spacingY = 80 + level;
     
 
         
