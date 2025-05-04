@@ -1,6 +1,6 @@
 #tree-container {
     min-width: 90vw;
-    min-height: 50vh;
+    min-height: 90vh;
 
     border: 1px solid #c6c6c6;
 
@@ -9,7 +9,8 @@
 
     margin-block: 20px;
 
-    transition: transform 0.3s ease;position: relative;
+    transition: transform 1s ease; 
+    position: relative;
 }
 
 .node {
@@ -27,12 +28,17 @@
 
     z-index: 10;
 
-    transition: left 0.5s ease, top 0.5s ease;
+    transition: left 1s ease, top 1s ease;
 }
 
 .node.fade-out {
     opacity: 0;
     pointer-events: none;
+}
+
+.node.highlight {
+    background-color: chocolate;
+    transition: background-color 0.3s ease;
 }
 
 .line {
@@ -41,7 +47,7 @@
     height: 2px;
     transform-origin: left center;
 
-    transition: left 0.5s ease, top 0.5s ease, transform 0.5s ease, width 0.5s ease;
+    transition: left 1s ease, top 1s ease, transform 1s ease, width 1s ease;
 }
 
 @keyframes fadeInScale {

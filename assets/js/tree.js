@@ -100,6 +100,9 @@ export class Tree {
         let y = node.right;
         let t2 = y.left;
         
+        // this.highlightNode(getElementByValue(node.value));
+        // this.highlightNode(getElementByValue(y.value));
+
         y.left = node
         node.right = t2;
         
@@ -113,6 +116,9 @@ export class Tree {
     _rotateRight(node) {
         let y = node.left;
         let t2 = y.right;
+
+        // this.highlightNode(getElementByValue(node.value));
+        // this.highlightNode(getElementByValue(y.value));
         
         y.right = node;
         node.left = t2;
@@ -154,12 +160,16 @@ export class Tree {
 
     _renderAnimated(container, node, x, y, level = 1, parent = null, nodeMap) {
         if (!node) return;
-    
-        const height = this._getHeight();
+
+        const childHeight = Math.max(this._getHeight(node.left), this._getHeight(node.right));
+
         const baseSpacing = 80;
-        const spacingX = baseSpacing * Math.pow(0.8, level) * (10 / height);
-        const spacingY = 80;
+        const funnelFactor = Math.pow(1.4, childHeight - level);
+        const spacingX = baseSpacing * funnelFactor;
+        const spacingY = 80 * Math.pow(1.2, childHeight);
     
+
+        
         let nodeEl = nodeMap[node.value];
         if (!nodeEl) {
             nodeEl = document.createElement('div');
@@ -200,6 +210,19 @@ export class Tree {
         this._renderAnimated(container, node.right, x + spacingX, y + spacingY, level + 1, node, nodeMap);
     }
     
+    highlightNode(node) {
+
+        if (!node) return;
     
+        node.classList.add('highlight');
+    
+        setTimeout(() => {
+            node.classList.remove('highlight')
+        }, 1000);
+    }
 }
 
+
+function getElementByValue(value) {
+    return Array.from(document.querySelectorAll('.node')).find(el => el.textContent == value);
+}
